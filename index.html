@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>请原谅我</title>
+<style>
+  body {
+    font-family:"Microsoft YaHei",sans-serif;
+    background:#fffaf0;
+    text-align:center;
+    padding:50px;
+  }
+  h2 {
+    color:#d62828;
+  }
+  p {
+    font-size:18px;
+    margin:20px;
+  }
+  button {
+    margin:15px;
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+    transition:all 0.2s;
+  }
+  #yes {
+    background:#2a9d8f;
+    color:#fff;
+  }
+  #no {
+    background:#ccc;
+    color:#333;
+    position:absolute;
+  }
+</style>
+</head>
+<body>
+  <h2>💌 对不起！</h2>
+  <p>我真心向你道歉，希望你能原谅我。</p>
+  <div style="margin-top:40px;">
+    <button id="yes" onclick="agree()">原谅</button>
+    <button id="no" ontouchstart="escape()">不原谅</button>
+  </div>
+
+  <!-- 背景音乐（循环播放，可换成自己喜欢的 mp3 链接） -->
+  <audio id="bgm" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
+
+<script>
+function playMusic(){
+  const bgm = document.getElementById("bgm");
+  bgm.play().catch(()=>{}); // 防止报错
+}
+
+function agree(){
+  playMusic(); // 点击“原谅”时确保播放
+  alert("谢谢你！我一定会好好改正 ❤️");
+}
+
+// 手机专用：手指点“不原谅”时按钮乱跑
+function escape(){
+  const btn = document.getElementById("no");
+  const maxW = window.innerWidth - 100;
+  const maxH = window.innerHeight - 50;
+  btn.style.top = Math.random() * maxH + "px";
+  btn.style.left = Math.random() * maxW + "px";
+}
+
+// 页面加载时尝试播放音乐（部分手机微信需要用户交互才会生效）
+window.addEventListener("load", playMusic);
+</script>
+</body>
+</html>
